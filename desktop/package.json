@@ -1,0 +1,24 @@
+{
+  "name": "aither-notes",
+  "version": "5.0.0",
+  "description": "Aither Notes desktop app",
+  "main": "main.js",
+  "author": "OGAitherTech",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "tech.aither.notes",
+    "productName": "Aither Notes",
+    "files": ["main.js", "preload.js", "../index.html", "../style.css", "../app.js", "../manifest.webmanifest", "../sw.js"],
+    "win": {"target": ["nsis", "portable"]},
+    "mac": {"target": ["dmg"]},
+    "linux": {"target": ["AppImage", "deb"]}
+  }
+}
