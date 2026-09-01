@@ -1,24 +1,50 @@
-# Aither Notes v4
+# Aither Notes v5
 
-A fast, private, local-first notes app designed for iPhone, iPad, and desktop browsers.
+A fast, private, local-first notes app for iPhone, iPad, desktop browsers, and desktop computers.
 
-## v4 improvements
+## v5 improvements
 
-- Added a redesigned Settings experience
-- Added system, light, and dark appearance modes
-- Added custom accent color
-- Added adjustable note editor text size
-- Added delete confirmation preference
-- Added show/hide note dates preference
-- Added JSON note backup export
-- Added storage information and delete-all controls
-- Improved mobile navigation and iPhone safe-area behavior
-- Improved full-screen Settings on iPhone
-- Improved theme handling and persistent preferences
-- Improved keyboard navigation and Escape handling
-- Improved swipe-to-close behavior
-- Keeps existing local notes during upgrades
+- Added a native desktop app powered by Electron
+- Desktop window supports Windows, macOS, and Linux builds
+- Added portable Windows build support
+- Added macOS DMG build support
+- Added Linux AppImage and DEB build support
+- Desktop app uses the same Aither Notes interface and local note storage
+- Kept the mobile-first iPhone experience
+- Kept Settings, themes, accent colors, backups, and Force Update
+- Kept existing notes and preferences during web-app upgrades
 - No emoji-based interface controls
+
+## Desktop app
+
+The desktop project is in `desktop/`.
+
+Requirements:
+
+- Node.js
+- npm
+
+Run the desktop app locally:
+
+```bash
+cd desktop
+npm install
+npm start
+```
+
+Build installers/packages:
+
+```bash
+cd desktop
+npm install
+npm run build
+```
+
+Electron Builder is configured for:
+
+- Windows: NSIS installer and portable executable
+- macOS: DMG
+- Linux: AppImage and DEB
 
 ## Features
 
@@ -36,6 +62,7 @@ A fast, private, local-first notes app designed for iPhone, iPad, and desktop br
 - Responsive phone, tablet, and desktop layouts
 - Installable web app support
 - Offline support
+- Native desktop app
 - No account or backend required
 
 ## iPhone
@@ -46,15 +73,24 @@ Open the GitHub Pages version in Safari, use Share, choose Add to Home Screen, a
 
 Notes and preferences are stored locally on the device. Aither Notes does not require an account or send notes to a server. Clearing browser or website data can remove local notes.
 
-## Files
+## Project files
 
-- `index.html` — application structure and iPhone/PWA metadata
+- `index.html` — application structure and PWA metadata
 - `style.css` — responsive interface and iOS-specific styling
 - `app.js` — notes, search, folders, settings, themes, storage, and interactions
 - `manifest.webmanifest` — installable web-app metadata
 - `sw.js` — offline caching
+- `desktop/main.js` — Electron desktop window
+- `desktop/preload.js` — secure desktop preload
+- `desktop/package.json` — desktop scripts and build configuration
 
 ## Version history
+
+### v5 — August 31, 2026
+- Added the Aither Notes desktop application.
+- Added Windows, macOS, and Linux packaging configuration.
+- Added secure Electron context isolation and sandboxing.
+- Updated project documentation with desktop build instructions.
 
 ### v4 — August 31, 2026
 - Major polish pass for the Settings and preferences system.
