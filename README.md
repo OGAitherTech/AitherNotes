@@ -1,30 +1,35 @@
-# Aither Notes v5
+# Aither Notes v5.1
 
 A fast, private, local-first notes app for iPhone, iPad, desktop browsers, and desktop computers.
 
-## v5 improvements
+## v5.1 improvements
 
-- Added a native desktop app powered by Electron
-- Desktop window supports Windows, macOS, and Linux builds
-- Added portable Windows build support
-- Added macOS DMG build support
-- Added Linux AppImage and DEB build support
-- Desktop app uses the same Aither Notes interface and local note storage
+- Polished the native desktop app
+- Added a dedicated desktop app icon
+- Added a clean startup experience so the window appears after it is ready
+- Added native app identification for Windows/macOS/Linux
+- Added desktop spellcheck support
+- Added safe external-link handling
+- Added Ctrl/Cmd+R cache-busting reload behavior in the desktop app
+- Improved Windows installer options and shortcuts
+- Added x64 and ARM64 Windows packaging
+- Added x64 and ARM64 macOS packaging
+- Improved Linux AppImage and DEB packaging
+- Added compressed ASAR packaging
 - Kept the mobile-first iPhone experience
-- Kept Settings, themes, accent colors, backups, and Force Update
-- Kept existing notes and preferences during web-app upgrades
+- Kept Settings, themes, backups, and Force Update
 - No emoji-based interface controls
 
 ## Desktop app
 
-The desktop project is in `desktop/`.
+The native desktop project is in `desktop/`.
 
 Requirements:
 
 - Node.js
 - npm
 
-Run the desktop app locally:
+Run it locally:
 
 ```bash
 cd desktop
@@ -40,11 +45,13 @@ npm install
 npm run build
 ```
 
-Electron Builder is configured for:
+Build targets:
 
-- Windows: NSIS installer and portable executable
-- macOS: DMG
-- Linux: AppImage and DEB
+- Windows: NSIS installer and portable executable, x64 and ARM64
+- macOS: DMG, x64 and ARM64
+- Linux: AppImage and DEB, x64
+
+The desktop app uses the same Aither Notes web interface and local browser storage. Your notes are not uploaded to a server by the desktop app.
 
 ## Features
 
@@ -82,9 +89,18 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 - `sw.js` — offline caching
 - `desktop/main.js` — Electron desktop window
 - `desktop/preload.js` — secure desktop preload
+- `desktop/icon.svg` — desktop app icon
 - `desktop/package.json` — desktop scripts and build configuration
 
 ## Version history
+
+### v5.1 — September 1, 2026
+- Polished the native desktop experience.
+- Added desktop icon and better startup behavior.
+- Added spellcheck and safe external-link handling.
+- Improved reload behavior.
+- Expanded Windows, macOS, and Linux architecture targets.
+- Improved installer configuration.
 
 ### v5 — August 31, 2026
 - Added the Aither Notes desktop application.
