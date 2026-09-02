@@ -1,6 +1,6 @@
 {
   "name": "aither-notes",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Aither Notes desktop app",
   "main": "main.js",
   "author": "OGAitherTech",
@@ -16,9 +16,13 @@
   "build": {
     "appId": "tech.aither.notes",
     "productName": "Aither Notes",
-    "files": ["main.js", "preload.js", "../index.html", "../style.css", "../app.js", "../manifest.webmanifest", "../sw.js"],
-    "win": {"target": ["nsis", "portable"]},
-    "mac": {"target": ["dmg"]},
-    "linux": {"target": ["AppImage", "deb"]}
+    "artifactName": "Aither-Notes-${version}-${os}-${arch}.${ext}",
+    "files": ["main.js", "preload.js", "icon.svg", "../index.html", "../style.css", "../app.js", "../manifest.webmanifest", "../sw.js"],
+    "asar": true,
+    "compression": "maximum",
+    "win": {"target": [{"target":"nsis","arch":["x64","arm64"]},{"target":"portable","arch":["x64","arm64"]}]},
+    "nsis": {"oneClick": false,"allowToChangeInstallationDirectory": true,"createDesktopShortcut": true,"createStartMenuShortcut": true},
+    "mac": {"target": [{"target":"dmg","arch":["x64","arm64"]}],"category":"public.app-category.productivity"},
+    "linux": {"target": [{"target":"AppImage","arch":["x64"]},{"target":"deb","arch":["x64"]}],"category":"Office"}
   }
 }
