@@ -1,18 +1,33 @@
 # Aither Notes v5.2
 
-A fast, private, local-first notes app for iPhone, iPad, desktop browsers, and desktop computers.
+A fast, private, local-first notes app for iPhone, iPad, desktop browsers, GitHub Pages, and desktop computers.
+
+## GitHub Pages
+
+Aither Notes is designed to run as a static site on GitHub Pages. It does not require Node.js, a server, a database, an API key, or a backend for the web app.
+
+The web app uses relative paths so it works correctly from a GitHub Pages project URL such as `/AitherNotes/` instead of assuming it is hosted at the domain root.
+
+For GitHub Pages, publish the repository's `main` branch and use the repository root as the source. After GitHub Pages finishes deploying, open the generated Pages URL in Safari or another modern browser.
+
+The app also supports installation as a PWA on supported browsers. On iPhone, open the Pages site in Safari, use Share, then choose Add to Home Screen.
 
 ## v5.2 improvements
 
-- Added note duplication from the editor
-- Added live word and character counts while writing
-- Added one-tap search clearing
-- Added JSON backup importing with duplicate-safe note IDs
-- Improved exported backup metadata
-- Added Cmd/Ctrl+N to create a note from the keyboard
-- Improved mobile editor action layout
-- Updated the About section to v5.2
-- Kept the native desktop app, iPhone layout, themes, offline support, and local storage
+- Improved GitHub Pages compatibility
+- Fixed service-worker caching behavior for GitHub Pages project URLs
+- Service worker now uses a versioned cache for safer updates
+- Service worker only handles same-origin GET requests
+- Network-first loading keeps deployed Pages files fresh while preserving offline support
+- Improved PWA manifest metadata
+- Added duplicate-note support
+- Added note word and character counts
+- Added JSON backup import
+- Added duplicate-ID protection when importing backups
+- Added search clearing
+- Added Cmd/Ctrl+N for a new note
+- Kept the mobile-first iPhone experience
+- Kept the native desktop app
 - No emoji-based interface controls
 
 ## Desktop app
@@ -50,31 +65,25 @@ The desktop app uses the same Aither Notes web interface and local browser stora
 
 ## Features
 
-- Create, edit, and delete notes
+- Create, edit, duplicate, and delete notes
 - Automatic local saving
-- Duplicate notes
 - Pin notes
 - Favorite notes
 - Instant search with clear control
 - Personal, School, and Ideas folders
 - Sort by updated date
-- Live word and character count while editing
 - Light, dark, or system appearance
 - Custom accent color
 - Adjustable editor text size
-- Export notes as JSON backups
-- Import JSON backups without duplicating existing note IDs
-- Cmd/Ctrl+K search shortcut
-- Cmd/Ctrl+N new-note shortcut
+- Word and character count
+- Export notes as JSON
+- Import JSON backups
 - Responsive phone, tablet, and desktop layouts
 - Installable web app support
 - Offline support
+- GitHub Pages compatible
 - Native desktop app
 - No account or backend required
-
-## iPhone
-
-Open the GitHub Pages version in Safari, use Share, choose Add to Home Screen, and launch Aither Notes from the Home Screen. Aither Notes supports iOS safe areas and touch-friendly controls.
 
 ## Privacy
 
@@ -84,9 +93,9 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 
 - `index.html` — application structure and PWA metadata
 - `style.css` — responsive interface and iOS-specific styling
-- `app.js` — notes, search, folders, settings, backups, storage, and interactions
+- `app.js` — notes, search, folders, settings, themes, storage, import/export, and interactions
 - `manifest.webmanifest` — installable web-app metadata
-- `sw.js` — offline caching
+- `sw.js` — GitHub Pages-safe offline caching
 - `desktop/main.js` — Electron desktop window
 - `desktop/preload.js` — secure desktop preload
 - `desktop/icon.svg` — desktop app icon
@@ -95,12 +104,13 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 ## Version history
 
 ### v5.2 — September 1, 2026
-- Added note duplication.
-- Added live word and character counts.
-- Added backup importing and improved export metadata.
-- Added a clear-search control.
-- Added Cmd/Ctrl+N for quick note creation.
-- Polished mobile editor controls.
+- Improved GitHub Pages compatibility.
+- Fixed service-worker behavior for project-site paths.
+- Added versioned network-first caching for safer updates.
+- Improved PWA metadata.
+- Added duplicate notes, backup import, search clearing, and note statistics.
+- Added Cmd/Ctrl+N for creating notes.
+- Updated documentation with GitHub Pages deployment instructions.
 
 ### v5.1 — September 1, 2026
 - Polished the native desktop experience.
