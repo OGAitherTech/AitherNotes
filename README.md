@@ -1,23 +1,18 @@
-# Aither Notes v5.1
+# Aither Notes v5.2
 
 A fast, private, local-first notes app for iPhone, iPad, desktop browsers, and desktop computers.
 
-## v5.1 improvements
+## v5.2 improvements
 
-- Polished the native desktop app
-- Added a dedicated desktop app icon
-- Added a clean startup experience so the window appears after it is ready
-- Added native app identification for Windows/macOS/Linux
-- Added desktop spellcheck support
-- Added safe external-link handling
-- Added Ctrl/Cmd+R cache-busting reload behavior in the desktop app
-- Improved Windows installer options and shortcuts
-- Added x64 and ARM64 Windows packaging
-- Added x64 and ARM64 macOS packaging
-- Improved Linux AppImage and DEB packaging
-- Added compressed ASAR packaging
-- Kept the mobile-first iPhone experience
-- Kept Settings, themes, backups, and Force Update
+- Added note duplication from the editor
+- Added live word and character counts while writing
+- Added one-tap search clearing
+- Added JSON backup importing with duplicate-safe note IDs
+- Improved exported backup metadata
+- Added Cmd/Ctrl+N to create a note from the keyboard
+- Improved mobile editor action layout
+- Updated the About section to v5.2
+- Kept the native desktop app, iPhone layout, themes, offline support, and local storage
 - No emoji-based interface controls
 
 ## Desktop app
@@ -57,15 +52,20 @@ The desktop app uses the same Aither Notes web interface and local browser stora
 
 - Create, edit, and delete notes
 - Automatic local saving
+- Duplicate notes
 - Pin notes
 - Favorite notes
-- Instant search
+- Instant search with clear control
 - Personal, School, and Ideas folders
 - Sort by updated date
+- Live word and character count while editing
 - Light, dark, or system appearance
 - Custom accent color
 - Adjustable editor text size
-- Export notes as JSON
+- Export notes as JSON backups
+- Import JSON backups without duplicating existing note IDs
+- Cmd/Ctrl+K search shortcut
+- Cmd/Ctrl+N new-note shortcut
 - Responsive phone, tablet, and desktop layouts
 - Installable web app support
 - Offline support
@@ -84,7 +84,7 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 
 - `index.html` — application structure and PWA metadata
 - `style.css` — responsive interface and iOS-specific styling
-- `app.js` — notes, search, folders, settings, themes, storage, and interactions
+- `app.js` — notes, search, folders, settings, backups, storage, and interactions
 - `manifest.webmanifest` — installable web-app metadata
 - `sw.js` — offline caching
 - `desktop/main.js` — Electron desktop window
@@ -93,6 +93,14 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 - `desktop/package.json` — desktop scripts and build configuration
 
 ## Version history
+
+### v5.2 — September 1, 2026
+- Added note duplication.
+- Added live word and character counts.
+- Added backup importing and improved export metadata.
+- Added a clear-search control.
+- Added Cmd/Ctrl+N for quick note creation.
+- Polished mobile editor controls.
 
 ### v5.1 — September 1, 2026
 - Polished the native desktop experience.
