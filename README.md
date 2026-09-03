@@ -1,32 +1,25 @@
-# Aither Notes v5.2
+# Aither Notes v5.3
 
 A fast, private, local-first notes app for iPhone, iPad, desktop browsers, GitHub Pages, and desktop computers.
 
 ## GitHub Pages
 
-Aither Notes is designed to run as a static site on GitHub Pages. It does not require Node.js, a server, a database, an API key, or a backend for the web app.
+Aither Notes is a static web app and is designed to work from a GitHub Pages project URL such as `/AitherNotes/`. It uses relative web paths, requires no server or API key, and keeps notes in local browser storage.
 
-The web app uses relative paths so it works correctly from a GitHub Pages project URL such as `/AitherNotes/` instead of assuming it is hosted at the domain root.
+For GitHub Pages, publish the repository's `main` branch from the repository root. After deployment, open the Pages URL in a modern browser. On iPhone, open it in Safari and use Share > Add to Home Screen for the app-like experience.
 
-For GitHub Pages, publish the repository's `main` branch and use the repository root as the source. After GitHub Pages finishes deploying, open the generated Pages URL in Safari or another modern browser.
+The service worker uses a versioned, network-first cache so deployed files can update without breaking offline support.
 
-The app also supports installation as a PWA on supported browsers. On iPhone, open the Pages site in Safari, use Share, then choose Add to Home Screen.
+## v5.3 improvements
 
-## v5.2 improvements
-
-- Improved GitHub Pages compatibility
-- Fixed service-worker caching behavior for GitHub Pages project URLs
-- Service worker now uses a versioned cache for safer updates
-- Service worker only handles same-origin GET requests
-- Network-first loading keeps deployed Pages files fresh while preserving offline support
-- Improved PWA manifest metadata
-- Added duplicate-note support
-- Added note word and character counts
-- Added JSON backup import
-- Added duplicate-ID protection when importing backups
-- Added search clearing
-- Added Cmd/Ctrl+N for a new note
-- Kept the mobile-first iPhone experience
+- Improved responsive accessibility and keyboard focus states
+- Improved mobile editor action handling
+- Improved note-card keyboard focus styling
+- Hardened note IDs and local-storage loading against malformed saved data
+- Improved theme initialization on startup
+- Kept GitHub Pages compatibility
+- Kept versioned service-worker caching and offline support
+- Kept duplicate notes, JSON backup import/export, search clearing, and note statistics
 - Kept the native desktop app
 - No emoji-based interface controls
 
@@ -72,16 +65,19 @@ The desktop app uses the same Aither Notes web interface and local browser stora
 - Instant search with clear control
 - Personal, School, and Ideas folders
 - Sort by updated date
+- Live word and character count
 - Light, dark, or system appearance
 - Custom accent color
 - Adjustable editor text size
-- Word and character count
 - Export notes as JSON
 - Import JSON backups
+- Cmd/Ctrl+K search shortcut
+- Cmd/Ctrl+N new-note shortcut
 - Responsive phone, tablet, and desktop layouts
+- Keyboard focus support
 - Installable web app support
+- GitHub Pages compatibility
 - Offline support
-- GitHub Pages compatible
 - Native desktop app
 - No account or backend required
 
@@ -92,7 +88,7 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 ## Project files
 
 - `index.html` — application structure and PWA metadata
-- `style.css` — responsive interface and iOS-specific styling
+- `style.css` — responsive interface, mobile layout, and accessibility styling
 - `app.js` — notes, search, folders, settings, themes, storage, import/export, and interactions
 - `manifest.webmanifest` — installable web-app metadata
 - `sw.js` — GitHub Pages-safe offline caching
@@ -102,6 +98,13 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 - `desktop/package.json` — desktop scripts and build configuration
 
 ## Version history
+
+### v5.3 — September 2, 2026
+- Improved responsive accessibility and keyboard focus states.
+- Improved mobile editor controls.
+- Hardened local-storage and note-ID handling.
+- Improved theme initialization.
+- Kept GitHub Pages and offline compatibility.
 
 ### v5.2 — September 1, 2026
 - Improved GitHub Pages compatibility.
