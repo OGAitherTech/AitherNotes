@@ -1,27 +1,60 @@
-# Aither Notes v5.3
+# Aither Notes v5.4
 
 A fast, private, local-first notes app for iPhone, iPad, desktop browsers, GitHub Pages, and desktop computers.
 
+## Shared Aither Account
+
+Aither Notes now connects to the same AitherBackend account service used by the other Aither apps. Create or sign in with the same email and password to use one Aither account across the ecosystem.
+
+- Registration: `/api/auth/register`
+- Sign in: `/api/auth/login`
+- Session restore: `/api/auth/session`
+- Sign out: `/api/auth/logout`
+- Secure credentialed requests with the Aither session cookie
+- Default backend: `https://aither-backend.onrender.com`
+- The account service is shared; notes themselves remain local to this app unless a future sync feature explicitly uploads them.
+
 ## GitHub Pages
 
-Aither Notes is a static web app and is designed to work from a GitHub Pages project URL such as `/AitherNotes/`. It uses relative web paths, requires no server or API key, and keeps notes in local browser storage.
+Aither Notes is a static web app and is designed to work from a GitHub Pages project URL such as `/AitherNotes/`. It uses relative web paths, requires no server or API key for notes, and keeps notes in local browser storage.
 
 For GitHub Pages, publish the repository's `main` branch from the repository root. After deployment, open the Pages URL in a modern browser. On iPhone, open it in Safari and use Share > Add to Home Screen for the app-like experience.
 
 The service worker uses a versioned, network-first cache so deployed files can update without breaking offline support.
 
-## v5.3 improvements
+## v5.4 improvements
 
-- Improved responsive accessibility and keyboard focus states
-- Improved mobile editor action handling
-- Improved note-card keyboard focus styling
-- Hardened note IDs and local-storage loading against malformed saved data
-- Improved theme initialization on startup
-- Kept GitHub Pages compatibility
-- Kept versioned service-worker caching and offline support
-- Kept duplicate notes, JSON backup import/export, search clearing, and note statistics
-- Kept the native desktop app
-- No emoji-based interface controls
+- Added shared AitherBackend account creation and sign-in
+- Added shared Aither session restore and sign-out
+- Kept notes local-first and private
+- Improved ecosystem account compatibility
+- Kept GitHub Pages compatibility and offline support
+
+## Features
+
+- Create, edit, duplicate, and delete notes
+- Automatic local saving
+- Pin notes
+- Favorite notes
+- Instant search with clear control
+- Personal, School, and Ideas folders
+- Sort by updated date
+- Live word and character count
+- Light, dark, or system appearance
+- Custom accent color
+- Adjustable editor text size
+- Export notes as JSON
+- Import JSON backups
+- Cmd/Ctrl+K search shortcut
+- Cmd/Ctrl+N new-note shortcut
+- Responsive phone, tablet, and desktop layouts
+- Keyboard focus support
+- Installable web app support
+- GitHub Pages compatibility
+- Offline support
+- Native desktop app
+- Shared Aither account
+- No account required for local notes
 
 ## Desktop app
 
@@ -48,56 +81,29 @@ npm install
 npm run build
 ```
 
-Build targets:
-
-- Windows: NSIS installer and portable executable, x64 and ARM64
-- macOS: DMG, x64 and ARM64
-- Linux: AppImage and DEB, x64
-
-The desktop app uses the same Aither Notes web interface and local browser storage. Your notes are not uploaded to a server by the desktop app.
-
-## Features
-
-- Create, edit, duplicate, and delete notes
-- Automatic local saving
-- Pin notes
-- Favorite notes
-- Instant search with clear control
-- Personal, School, and Ideas folders
-- Sort by updated date
-- Live word and character count
-- Light, dark, or system appearance
-- Custom accent color
-- Adjustable editor text size
-- Export notes as JSON
-- Import JSON backups
-- Cmd/Ctrl+K search shortcut
-- Cmd/Ctrl+N new-note shortcut
-- Responsive phone, tablet, and desktop layouts
-- Keyboard focus support
-- Installable web app support
-- GitHub Pages compatibility
-- Offline support
-- Native desktop app
-- No account or backend required
-
 ## Privacy
 
-Notes and preferences are stored locally on the device. Aither Notes does not require an account or send notes to a server. Clearing browser or website data can remove local notes.
+Notes and preferences are stored locally on the device. Account credentials and sessions are handled by AitherBackend. Notes are not uploaded merely because you sign in.
 
 ## Project files
 
 - `index.html` — application structure and PWA metadata
 - `style.css` — responsive interface, mobile layout, and accessibility styling
 - `app.js` — notes, search, folders, settings, themes, storage, import/export, and interactions
+- `aither-account.js` — shared AitherBackend account client
 - `manifest.webmanifest` — installable web-app metadata
 - `sw.js` — GitHub Pages-safe offline caching
 - `desktop/main.js` — Electron desktop window
 - `desktop/preload.js` — secure desktop preload
-- `desktop/icon.svg` — desktop app icon
 - `desktop/package.json` — desktop scripts and build configuration
 
 ## Version history
+
+### v5.4 — September 5, 2026
+- Added the shared Aither account service.
+- Added registration, sign-in, session restore, and sign-out.
+- Connected account authentication to the common AitherBackend service.
+- Kept note data local-first.
 
 ### v5.3 — September 2, 2026
 - Improved responsive accessibility and keyboard focus states.
@@ -128,34 +134,3 @@ Notes and preferences are stored locally on the device. Aither Notes does not re
 - Added Windows, macOS, and Linux packaging configuration.
 - Added secure Electron context isolation and sandboxing.
 - Updated project documentation with desktop build instructions.
-
-### v4 — August 31, 2026
-- Major polish pass for the Settings and preferences system.
-- Improved theme behavior, including System appearance.
-- Improved mobile and iPhone interactions.
-- Improved persistent preferences.
-- Improved export and storage controls.
-
-### v3.1 — August 31, 2026
-- Added Settings with appearance, accent, text size, deletion, and date preferences.
-- Added JSON note export and delete-all controls.
-- Added local note count in Settings.
-- Added Settings navigation for desktop and iPhone.
-
-### v3 — August 31, 2026
-- Refreshed the complete visual interface.
-- Improved iPhone and touch interaction.
-- Removed emoji-based controls.
-- Improved note editor controls.
-- Added reduced-motion support.
-- Improved PWA metadata.
-- Added service-worker cache cleanup.
-
-### v2.1
-- Refined the interface and mobile experience.
-
-### v2
-- Added iPhone-focused layout, PWA support, swipe-to-close editing, and offline caching.
-
-### v1
-- Initial Aither Notes release.
