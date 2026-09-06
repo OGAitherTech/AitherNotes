@@ -1,13 +1,12 @@
-/* Aither Cloud Sync — syncs this app's non-secret local data to the signed-in Aither account. */
-(() => {
-  'use strict';
-  const APP_ID='notes', KEY='aither-cloud-notes', API='https://aither-backend.onrender.com';
-  const blocked=/(password|token|secret|api[_-]?key|client[_-]?secret|authorization|session)/i;
-  const snapshot=()=>{const data={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&!blocked.test(k))data[k]=localStorage.getItem(k)}return data};
-  const restore=data=>{if(!data||typeof data!=='object')return;Object.entries(data).forEach(([k,v])=>{if(!blocked.test(k)&&typeof v==='string')try{localStorage.setItem(k,v)}catch(_){}})};
-  const req=async(p,o={})=>{const r=await fetch(API+p,{...o,credentials:'include',headers:{Accept:'application/json','Content-Type':'application/json',...(o.headers||{})},cache:'no-store'});if(!r.ok)throw Error('Cloud sync failed');return r.json()};
-  let last='';
-  async function sync(){try{const s=await req('/api/auth/session');if(!s.authenticated)return;const cloud=await req('/api/data/'+APP_ID);const local=snapshot();const stamp=cloud.updated_at||'';if(stamp&&stamp!==last&&cloud.data&&Object.keys(cloud.data).length){restore(cloud.data);last=stamp;return}await req('/api/data/'+APP_ID,{method:'PUT',body:JSON.stringify({data:local})});last=Date.now().toString()}catch(_){}}
-  window.AitherCloud={sync,snapshot};
-  sync();setInterval(sync,15000);window.addEventListener('aither:user-changed',sync);window.addEventListener('storage',()=>sync());
+/* Aither Cloud Sync — offline-first; cloud sync must never block the app. */
+(()=>{
+'use strict';
+const APP_ID='notes',API='https://aitherbackend.onrender.com',BLOCKED=/(password|token|secret|api[_-]?key|client[_-]?secret|authorization|session)/i;
+const snapshot=()=>{const d={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&!BLOCKED.test(k))d[k]=localStorage.getItem(k)}return d};
+const restore=d=>{if(!d||typeof d!=='object')return;Object.entries(d).forEach(([k,v])=>{if(!BLOCKED.test(k)&&typeof v==='string')try{localStorage.setItem(k,v)}catch(_){}})};
+async function request(path,options={}){const c=new AbortController(),timer=setTimeout(()=>c.abort(),7000);try{const r=await fetch(API+path,{...options,credentials:'include',headers:{Accept:'application/json','Content-Type':'application/json',...(options.headers||{})},cache:'no-store',signal:c.signal});let data={};try{data=await r.json()}catch{}if(!r.ok)throw Error(`HTTP ${r.status}`);return data}finally{clearTimeout(timer)}}
+let last='';
+async function sync(){try{const session=await request('/api/auth/session');if(!session.authenticated)return;const cloud=await request('/api/data/'+APP_ID),local=snapshot();if(cloud.updated_at&&cloud.updated_at!==last&&cloud.data&&Object.keys(cloud.data).length){restore(cloud.data);last=cloud.updated_at;return}await request('/api/data/'+APP_ID,{method:'PUT',body:JSON.stringify({data:local})});last=Date.now().toString()}catch(error){console.warn('[Aither Cloud] Offline/cloud sync skipped:',error?.message||error)}}
+window.AitherCloud={sync,snapshot};
+setTimeout(sync,250);setInterval(sync,15000);addEventListener('aither:user-changed',sync);addEventListener('storage',sync);
 })();
